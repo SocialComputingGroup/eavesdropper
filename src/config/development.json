@@ -1,0 +1,6 @@
+{
+  "mongoDB_URI": "mongo",
+  "wsURL": "ws://localhost:7545",
+  "certPath": "",
+  "keyPath": ""
+}
