@@ -6,7 +6,6 @@ import logger = require('morgan')
 import contract = require('@truffle/contract')
 
 import {TokenFactoryListener} from './lib/contractsListeners/TokenFactoryListener'
-import { TokenTemplateListener } from './lib/contractsListeners/TokenTemplateListener'
 const TokenFactory = require('../../build/contracts/TokenFactory.json')
 const CrowdsaleFactory = require('../../build/contracts/CrowdsaleFactory.json')
 const Web3 = require('web3')
