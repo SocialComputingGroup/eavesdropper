@@ -9,7 +9,6 @@ import {TokenFactoryListener} from './lib/contractsListeners/TokenFactoryListene
 import { TokenTemplateListener } from './lib/contractsListeners/TokenTemplateListener'
 const TokenFactory = require('../../build/contracts/TokenFactory.json')
 const CrowdsaleFactory = require('../../build/contracts/CrowdsaleFactory.json')
-const VendingMachineFactory = require('../../build/contracts/VendingMachineFactory.json')
 const Web3 = require('web3')
 import * as Sentry from "@sentry/node"
 import * as Tracing from"@sentry/tracing"
@@ -28,7 +27,6 @@ let web3 = new Web3 (new Web3.providers.WebsocketProvider("ws://",{
 import { initDB } from './config/database'
 import * as EventUtilities from './lib/EventsUtilities'
 import { CrowdsaleFactoryListener } from './lib/contractsListeners/CrowdsaleFactoryListener'
-import { VendingMachineFactoryListener } from './lib/contractsListeners/VendingMachineFactoryListener'
 
 initDB()
 let app = express()
@@ -40,16 +38,12 @@ const address = ''
 const contr = new web3.eth.Contract(TokenFactory.abi,address)
 const crowdsaleFactoryAddress = ''
 const crowdsaleFactoryContr = new web3.eth.Contract(CrowdsaleFactory.abi, crowdsaleFactoryAddress)
-const vendingMachineFactoryAddress = ''
-const vendingMachineFactoryContr = new web3.eth.Contract(VendingMachineFactory.abi, vendingMachineFactoryAddress)
 
 let tokenFactoryEvents = new TokenFactoryListener(address, contr, web3)
 let crowdsaleFactoryEvents = new CrowdsaleFactoryListener(crowdsaleFactoryAddress, crowdsaleFactoryContr, web3)
-let vendingMachineFactoryEvents = new VendingMachineFactoryListener(vendingMachineFactoryAddress, vendingMachineFactoryContr, web3)
 
 tokenFactoryEvents.subscribeTo('TokenAdded')
 crowdsaleFactoryEvents.subscribeTo('CrowdsaleAdded')
-vendingMachineFactoryEvents.subscribeTo('VendingMachineAdded')
 
 EventUtilities.reloadEventsListenerFromDB(web3)
 //tokenEvents.subscribeTo('Transfer')
